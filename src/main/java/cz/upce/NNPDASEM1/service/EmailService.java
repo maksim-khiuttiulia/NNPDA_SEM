@@ -40,11 +40,11 @@ public class EmailService {
     }
 
 
-    public void sendNewPasswordEmail(User user) {
-        String header = "Password update";
-        String body = "URL: 127.0.0.1:8080/users/new-password-apply/" + jwtTokenProvider.createToken(user.getUsername(), JwtTokenType.PASSWORD_RESET);
-
-        sendEmail(user, header, body);
+    public void sendResetPasswordEmail(User user) {
+        String url = baseUrl + "/auth/reset-password/" + jwtTokenProvider.createToken(user.getUsername(), JwtTokenType.PASSWORD_RESET);
+        String subject = MessageUtils.getMessage("email.reset.password.subject", Locale.getDefault());
+        String body = MessageUtils.getMessage("email.reset.password.body", Locale.getDefault(), url);
+        sendEmail(user, subject, body);
     }
 
     private void sendEmail(User user, String header, String body) {
