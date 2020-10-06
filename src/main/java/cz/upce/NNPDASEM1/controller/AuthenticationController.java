@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("api/auth")
 public class AuthenticationController extends ControllerAncestor {
@@ -18,7 +20,7 @@ public class AuthenticationController extends ControllerAncestor {
     private UserService userService;
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public ResponseEntity<?> register(@RequestBody UserDto userDto) {
+    public ResponseEntity<?> register(@RequestBody @Valid UserDto userDto) {
         User user = new User();
         user.setFirstName(userDto.getFirstName());
         user.setLastName(userDto.getLastName());
@@ -36,7 +38,7 @@ public class AuthenticationController extends ControllerAncestor {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ResponseEntity<AuthDto> login(@RequestBody AuthDto authDto) {
+    public ResponseEntity<AuthDto> login(@RequestBody @Valid AuthDto authDto) {
         String username = authDto.getUsername();
         String password = authDto.getPassword();
         String token = userService.login(username, password);
@@ -52,7 +54,7 @@ public class AuthenticationController extends ControllerAncestor {
     }
 
     @RequestMapping(value = "/reset-password/{token}", method = RequestMethod.POST)
-    public ResponseEntity<?> resetPassword(@PathVariable("token") String token, @RequestBody PasswordDto passwordDto) {
+    public ResponseEntity<?> resetPassword(@PathVariable("token") String token, @RequestBody @Valid PasswordDto passwordDto) {
         userService.resetPassword(token, passwordDto.getNewPassword());
         return new ResponseEntity<>(HttpStatus.OK);
     }

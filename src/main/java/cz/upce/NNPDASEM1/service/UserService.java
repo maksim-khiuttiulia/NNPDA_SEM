@@ -70,6 +70,7 @@ public class UserService {
         return jwtTokenProvider.createToken(username, JwtTokenType.NORMAL);
     }
 
+
     public void sendResetPasswordEmail(String username) {
         User user = findByUsername(username);
         if (user == null) {
@@ -81,6 +82,7 @@ public class UserService {
         emailService.sendResetPasswordEmail(user);
     }
 
+    @Transactional(rollbackOn = Exception.class)
     public void resetPassword(String token, String password) {
         User user = getUserByToken(token, JwtTokenType.PASSWORD_RESET);
         user.setPassword(passwordEncoder.encode(password));
@@ -88,8 +90,9 @@ public class UserService {
         userRepository.save(user);
     }
 
+    @Transactional(rollbackOn = Exception.class)
     public void changePassword(User user, PasswordDto passwordDto) {
-        if (passwordEncoder.matches(passwordDto.getOldPassword(), user.getPassword())) {
+        if (!passwordEncoder.matches(passwordDto.getOldPassword(), user.getPassword())) {
             throw new ValidationException("Passwords not equals");
         }
         user.setPassword(passwordEncoder.encode(passwordDto.getNewPassword()));

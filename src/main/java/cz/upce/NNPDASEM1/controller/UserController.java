@@ -11,14 +11,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("api/users")
 public class UserController extends ControllerAncestor {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/update-password", method = RequestMethod.POST)
-    public ResponseEntity<?> updatePassword(@RequestBody PasswordDto passwordDto) {
+    @RequestMapping(value = "/change-password", method = RequestMethod.POST)
+    public ResponseEntity<?> updatePassword(@RequestBody @Valid PasswordDto passwordDto) {
         User user = getCurrentUser();
         userService.changePassword(user, passwordDto);
         return new ResponseEntity<>(HttpStatus.OK);
