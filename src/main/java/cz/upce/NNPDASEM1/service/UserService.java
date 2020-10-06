@@ -9,7 +9,7 @@ import cz.upce.NNPDASEM1.repository.UserRepository;
 import cz.upce.NNPDASEM1.security.JwtToken;
 import cz.upce.NNPDASEM1.security.JwtTokenProvider;
 import cz.upce.NNPDASEM1.security.JwtTokenType;
-import cz.upce.NNPDASEM1.utils.StringUtils;
+import cz.upce.NNPDASEM1.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -84,14 +84,16 @@ public class UserService {
     public void resetPassword(String token, String password) {
         User user = getUserByToken(token, JwtTokenType.PASSWORD_RESET);
         user.setPassword(passwordEncoder.encode(password));
+        user.setLastPasswordReset(DateUtils.getCurrentDate());
         userRepository.save(user);
     }
 
     public void changePassword(User user, PasswordDto passwordDto) {
-        if (StringUtils.isNotEquals(user.getPassword(), passwordEncoder.encode(passwordDto.getOldPassword()))) {
+        if (passwordEncoder.matches(passwordDto.getOldPassword(), user.getPassword())) {
             throw new ValidationException("Passwords not equals");
         }
         user.setPassword(passwordEncoder.encode(passwordDto.getNewPassword()));
+        user.setLastPasswordReset(DateUtils.getCurrentDate());
         userRepository.save(user);
     }
 

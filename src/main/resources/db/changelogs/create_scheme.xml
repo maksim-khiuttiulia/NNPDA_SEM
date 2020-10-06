@@ -6,7 +6,7 @@
 
 
     <changeSet id="1" author="Maks">
-        <createTable tableName="NN_USER">
+        <createTable tableName="NN_USERS">
             <column name="USER_ID" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>

@@ -1,0 +1,19 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+
+    <changeSet id="1" author="Maks">
+        <insert tableName="NN_USERS">
+            <column name="USER_ID" value="-1"/>
+            <column name="USERNAME" value="admin"/>
+            <column name="EMAIL" value="enot-odpad@post.cz"/>
+            <column name="PASSWORD" value="$2a$10$QR/BHlRGMO6djeV37Q0YWeHWPmJ.iQL1I53nM72CEeaBQoX27Puk6"/>
+            <column name="FIRST_NAME" value="ADMIN"/>
+            <column name="LAST_NAME" value="ADMIN"/>
+            <column name="STATUS" value="ACTIVE"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>
