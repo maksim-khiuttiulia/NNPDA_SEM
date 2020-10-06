@@ -1,10 +1,12 @@
 package cz.upce.NNPDASEM1.domain.user;
 
+import cz.upce.NNPDASEM1.domain.device.Device;
 import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 @Data
@@ -38,6 +40,9 @@ public class User {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, name = "STATUS")
     private UserStatus status;
+
+    @OneToMany(mappedBy = "owner")
+    private List<Device> devices;
 
     @Override
     public boolean equals(Object o) {

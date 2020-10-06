@@ -33,4 +33,41 @@
             </column>
         </createTable>
     </changeSet>
+
+    <changeSet id="2" author="Maks">
+        <createTable tableName="NN_DEVICES">
+            <column name="DEVICE_ID" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="NAME" type="varchar">
+                <constraints nullable="false" unique="false"/>
+            </column>
+            <column name="USER_ID" type="bigint">
+                <constraints nullable="false" unique="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="NN_DEVICES" baseColumnNames="USER_ID" constraintName="FK_NN_DEVICES_01"
+                                 referencedTableName="NN_USERS"
+                                 referencedColumnNames="USER_ID"/>
+        <addUniqueConstraint tableName="NN_DEVICES" columnNames="USER_ID, NAME"
+                             constraintName="UN_CONST_NN_DEVICES_01"/>
+    </changeSet>
+
+    <changeSet id="3" author="Maks">
+        <createTable tableName="NN_SENSORS">
+            <column name="SENSOR_ID" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="NAME" type="varchar">
+                <constraints nullable="false" unique="false"/>
+            </column>
+            <column name="DEVICE_ID" type="bigint">
+                <constraints nullable="false" unique="false"/>
+            </column>
+        </createTable>
+        <addUniqueConstraint tableName="NN_DEVICES" columnNames="DEVICE_ID, NAME"/>
+        <addForeignKeyConstraint baseTableName="NN_SENSORS" baseColumnNames="DEVICE_ID"
+                                 constraintName="FK_NN_SENSORS_01" referencedTableName="NN_DEVICES"
+                                 referencedColumnNames="DEVICE_ID"/>
+    </changeSet>
 </databaseChangeLog>

@@ -1,5 +1,6 @@
 package cz.upce.NNPDASEM1.exceptions;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -42,6 +43,32 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         errors.setStatus(HttpStatus.FORBIDDEN.value());
 
         return new ResponseEntity<>(errors, HttpStatus.FORBIDDEN);
+    }
+
+    @ExceptionHandler(NotFoundException.class)
+    public ResponseEntity<ErrorResponse> NotFoundExceptionHandler(NotFoundException ex) {
+
+        ex.printStackTrace();
+
+        ErrorResponse errors = new ErrorResponse();
+        errors.setTimestamp(LocalDateTime.now());
+        errors.setError(ex.getLocalizedMessage());
+        errors.setStatus(HttpStatus.NOT_FOUND.value());
+
+        return new ResponseEntity<>(errors, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<ErrorResponse> dataIntegrityViolationExceptionExceptionHandler(DataIntegrityViolationException ex) {
+
+        ex.printStackTrace();
+
+        ErrorResponse errors = new ErrorResponse();
+        errors.setTimestamp(LocalDateTime.now());
+        errors.setError(ex.getLocalizedMessage());
+        errors.setStatus(HttpStatus.BAD_REQUEST.value());
+
+        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
 
     @Override

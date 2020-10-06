@@ -16,4 +16,61 @@
             <column name="STATUS" value="ACTIVE"/>
         </insert>
     </changeSet>
+
+    <changeSet id="2" author="Maks">
+        <insert tableName="NN_DEVICES">
+            <column name="DEVICE_ID" value="-10"/>
+            <column name="NAME" value="DEVICE1"/>
+            <column name="USER_ID" value="-1"/>
+        </insert>
+
+        <insert tableName="NN_DEVICES">
+            <column name="DEVICE_ID" value="-9"/>
+            <column name="NAME" value="DEVICE2"/>
+            <column name="USER_ID" value="-1"/>
+        </insert>
+
+        <insert tableName="NN_DEVICES">
+            <column name="DEVICE_ID" value="-8"/>
+            <column name="NAME" value="DEVICE3"/>
+            <column name="USER_ID" value="-1"/>
+        </insert>
+
+        <insert tableName="NN_DEVICES">
+            <column name="DEVICE_ID" value="-7"/>
+            <column name="NAME" value="DEVICE4"/>
+            <column name="USER_ID" value="-1"/>
+        </insert>
+
+
+        <insert tableName="NN_SENSORS">
+            <column name="SENSOR_ID" value="-10"/>
+            <column name="NAME" value="SENSOR1"/>
+            <column name="DEVICE_ID" value="-10"/>
+        </insert>
+
+        <insert tableName="NN_SENSORS">
+            <column name="SENSOR_ID" value="-9"/>
+            <column name="NAME" value="SENSOR2"/>
+            <column name="DEVICE_ID" value="-10"/>
+        </insert>
+
+        <insert tableName="NN_SENSORS">
+            <column name="SENSOR_ID" value="-8"/>
+            <column name="NAME" value="SENSOR3"/>
+            <column name="DEVICE_ID" value="-10"/>
+        </insert>
+
+        <insert tableName="NN_SENSORS">
+            <column name="SENSOR_ID" value="-7"/>
+            <column name="NAME" value="SENSOR4"/>
+            <column name="DEVICE_ID" value="-9"/>
+        </insert>
+
+        <insert tableName="NN_SENSORS">
+            <column name="SENSOR_ID" value="-6"/>
+            <column name="NAME" value="SENSOR5"/>
+            <column name="DEVICE_ID" value="-9"/>
+        </insert>
+    </changeSet>
 </databaseChangeLog>
