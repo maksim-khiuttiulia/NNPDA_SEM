@@ -18,6 +18,7 @@ const DeviceAdminListItem: FC<Props> = (props: PropsWithChildren<Props>) => {
                 <div className="card-body">
                     <h5 className="card-title">{device.name}</h5>
                     <h6 className="card-subtitle mb-2 text-muted">{device.location.alias}</h6>
+                    <h6 className="card-subtitle mb-2 text-muted">{device.owner.username}</h6>
                 </div>
             </div>
         </NavLink>

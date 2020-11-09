@@ -53,8 +53,12 @@ services:
 
   react:
     container_name: react
-    build: frontend
-    restart: always
+    build:
+      context: ./frontend/
+      dockerfile: ./Dockerfile
     ports:
-      - 3001:3000
+      - 3000:3000
+    stdin_open: true
+    depends_on:
+      - app
 

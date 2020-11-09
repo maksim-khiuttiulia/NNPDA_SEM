@@ -30,6 +30,10 @@ public class SensorService {
         return sensorRepository.findByDeviceAndDevice_Owner(device, user);
     }
 
+    public List<Sensor> getSensors(Device device) {
+        return sensorRepository.findByDevice(device);
+    }
+
     public Sensor getSensor(Long id, Device device) {
         Optional<Sensor> sensor = sensorRepository.findBySensorIdAndDevice(id, device);
         if (!sensor.isPresent()) {

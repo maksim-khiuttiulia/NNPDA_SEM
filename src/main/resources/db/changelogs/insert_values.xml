@@ -16,6 +16,17 @@
             <column name="STATUS" value="ACTIVE"/>
             <column name="ROLE" value="ADMIN"/>
         </insert>
+
+        <insert tableName="NN_USERS">
+            <column name="USER_ID" value="-2"/>
+            <column name="USERNAME" value="user"/>
+            <column name="EMAIL" value="enot@post.cz"/>
+            <column name="PASSWORD" value="$2a$10$QR/BHlRGMO6djeV37Q0YWeHWPmJ.iQL1I53nM72CEeaBQoX27Puk6"/>
+            <column name="FIRST_NAME" value="ADMIN"/>
+            <column name="LAST_NAME" value="ADMIN"/>
+            <column name="STATUS" value="ACTIVE"/>
+            <column name="ROLE" value="USER"/>
+        </insert>
     </changeSet>
 
     <changeSet id="2" author="Maks">
@@ -36,71 +47,142 @@
             <column name="BUILDING_NUMBER" value="1"/>
             <column name="USER_ID" value="-1"/>
         </insert>
+
+        <insert tableName="NN_LOCATIONS">
+            <column name="LOCATION_ID" value="3"/>
+            <column name="ALIAS" value="Work"/>
+            <column name="CITY" value="BRNO"/>
+            <column name="STREET" value="CS.LEGII"/>
+            <column name="BUILDING_NUMBER" value="595"/>
+            <column name="USER_ID" value="-2"/>
+        </insert>
+
+        <insert tableName="NN_LOCATIONS">
+            <column name="LOCATION_ID" value="4"/>
+            <column name="ALIAS" value="Home"/>
+            <column name="CITY" value="BRNO"/>
+            <column name="STREET" value="TRIDA MIRU"/>
+            <column name="BUILDING_NUMBER" value="1"/>
+            <column name="USER_ID" value="-2"/>
+        </insert>
     </changeSet>
 
     <changeSet id="3" author="Maks">
         <insert tableName="NN_DEVICES">
             <column name="DEVICE_ID" value="-10"/>
-            <column name="NAME" value="DEVICE1"/>
+            <column name="NAME" value="KITCHEN WORK"/>
             <column name="USER_ID" value="-1"/>
             <column name="LOCATION_ID" value="1"/>
         </insert>
 
         <insert tableName="NN_DEVICES">
             <column name="DEVICE_ID" value="-9"/>
-            <column name="NAME" value="DEVICE2"/>
+            <column name="NAME" value="BATHROOM HOME"/>
             <column name="USER_ID" value="-1"/>
-            <column name="LOCATION_ID" value="1"/>
+            <column name="LOCATION_ID" value="2"/>
         </insert>
 
         <insert tableName="NN_DEVICES">
             <column name="DEVICE_ID" value="-8"/>
-            <column name="NAME" value="DEVICE3"/>
-            <column name="USER_ID" value="-1"/>
-            <column name="LOCATION_ID" value="2"/>
+            <column name="NAME" value="KITCHEN"/>
+            <column name="USER_ID" value="-2"/>
+            <column name="LOCATION_ID" value="3"/>
         </insert>
 
         <insert tableName="NN_DEVICES">
             <column name="DEVICE_ID" value="-7"/>
-            <column name="NAME" value="DEVICE4"/>
-            <column name="USER_ID" value="-1"/>
-            <column name="LOCATION_ID" value="2"/>
+            <column name="NAME" value="BATHROOM"/>
+            <column name="USER_ID" value="-2"/>
+            <column name="LOCATION_ID" value="4"/>
         </insert>
-
-
+        <!-- =========================================== -->
         <insert tableName="NN_SENSORS">
             <column name="SENSOR_ID" value="-10"/>
-            <column name="NAME" value="SENSOR1"/>
+            <column name="NAME" value="KITCHEN THERMOMETER"/>
             <column name="DEVICE_ID" value="-10"/>
             <column name="TYPE" value="THERMOMETER"/>
         </insert>
 
         <insert tableName="NN_SENSORS">
             <column name="SENSOR_ID" value="-9"/>
-            <column name="NAME" value="SENSOR2"/>
+            <column name="NAME" value="KITCHEN ELECTRICITY"/>
             <column name="DEVICE_ID" value="-10"/>
-            <column name="TYPE" value="THERMOMETER"/>
+            <column name="TYPE" value="ELECTRICITY_SENSOR"/>
         </insert>
 
         <insert tableName="NN_SENSORS">
             <column name="SENSOR_ID" value="-8"/>
-            <column name="NAME" value="SENSOR3"/>
+            <column name="NAME" value="KITCHEN WATER"/>
             <column name="DEVICE_ID" value="-10"/>
-            <column name="TYPE" value="THERMOMETER"/>
+            <column name="TYPE" value="WATER_FLOW_SENSOR"/>
         </insert>
-
+        <!-- =========================================== -->
         <insert tableName="NN_SENSORS">
-            <column name="SENSOR_ID" value="-7"/>
-            <column name="NAME" value="SENSOR4"/>
+            <column name="SENSOR_ID" value="-99"/>
+            <column name="NAME" value="BATHROOM THERMOMETER"/>
             <column name="DEVICE_ID" value="-9"/>
             <column name="TYPE" value="THERMOMETER"/>
         </insert>
 
         <insert tableName="NN_SENSORS">
-            <column name="SENSOR_ID" value="-6"/>
-            <column name="NAME" value="SENSOR5"/>
+            <column name="SENSOR_ID" value="-98"/>
+            <column name="NAME" value="BATHROOM ELECTRICITY"/>
             <column name="DEVICE_ID" value="-9"/>
+            <column name="TYPE" value="ELECTRICITY_SENSOR"/>
+        </insert>
+
+        <insert tableName="NN_SENSORS">
+            <column name="SENSOR_ID" value="-97"/>
+            <column name="NAME" value="BATHROOM WATER"/>
+            <column name="DEVICE_ID" value="-9"/>
+            <column name="TYPE" value="WATER_FLOW_SENSOR"/>
+        </insert>
+
+        <!-- =========================================== -->
+        <insert tableName="NN_SENSORS">
+            <column name="SENSOR_ID" value="-96"/>
+            <column name="NAME" value="KITCHEN THERMOMETER"/>
+            <column name="DEVICE_ID" value="-8"/>
             <column name="TYPE" value="THERMOMETER"/>
         </insert>
+
+        <insert tableName="NN_SENSORS">
+            <column name="SENSOR_ID" value="-95"/>
+            <column name="NAME" value="KITCHEN ELECTRICITY"/>
+            <column name="DEVICE_ID" value="-8"/>
+            <column name="TYPE" value="ELECTRICITY_SENSOR"/>
+        </insert>
+
+        <insert tableName="NN_SENSORS">
+            <column name="SENSOR_ID" value="-94"/>
+            <column name="NAME" value="KITCHEN WATER"/>
+            <column name="DEVICE_ID" value="-8"/>
+            <column name="TYPE" value="WATER_FLOW_SENSOR"/>
+        </insert>
+        <!-- =========================================== -->
+        <insert tableName="NN_SENSORS">
+            <column name="SENSOR_ID" value="-93"/>
+            <column name="NAME" value="BATHROOM THERMOMETER"/>
+            <column name="DEVICE_ID" value="-7"/>
+            <column name="TYPE" value="THERMOMETER"/>
+        </insert>
+
+        <insert tableName="NN_SENSORS">
+            <column name="SENSOR_ID" value="-92"/>
+            <column name="NAME" value="BATHROOM ELECTRICITY"/>
+            <column name="DEVICE_ID" value="-7"/>
+            <column name="TYPE" value="ELECTRICITY_SENSOR"/>
+        </insert>
+
+        <insert tableName="NN_SENSORS">
+            <column name="SENSOR_ID" value="-91"/>
+            <column name="NAME" value="BATHROOM WATER"/>
+            <column name="DEVICE_ID" value="-7"/>
+            <column name="TYPE" value="WATER_FLOW_SENSOR"/>
+        </insert>
+
+        <!-- =========================================== -->
+
+
     </changeSet>
 </databaseChangeLog>

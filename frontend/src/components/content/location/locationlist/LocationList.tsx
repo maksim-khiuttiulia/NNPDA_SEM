@@ -1,19 +1,19 @@
 import React, {ReactNode} from "react";
-import DeviceAdminListItem from "./DeviceAdminListItem";
+import LocationListItem from "./LocationListItem";
 import {WithTranslation, withTranslation} from "react-i18next";
-import {Device} from "../../../../../entities/Device";
-import {addDevice} from "../../../../../services/DeviceService";
-import Loader from "../../../loader/Loader";
-import ErrorMessage from "../../../../common/errormessage/ErrorMessage";
-import AddEditDeviceDialog from "../../../devices/addeditdevice/AddEditDeviceDialog";
-import {getDevicesAdmin} from "../../../../../services/AdminService";
+import Loader from "../../loader/Loader";
+import ErrorMessage from "../../../common/errormessage/ErrorMessage";
+import {Location} from "../../../../entities/Location";
+import {addLocation, getLocations} from "../../../../services/LocationService";
+import AddLocationDialog from "../addlocation/AddLocationDialog";
+import CurrentUserStore from "../../../../storage/CurrentUserStore";
 
 interface Props extends WithTranslation {
 
 }
 
 interface State {
-    devices: Device[]
+    locations: Location[]
 
     addNewDialogOpen: boolean
 
@@ -22,9 +22,9 @@ interface State {
 }
 
 
-class DeviceAdminList extends React.Component<Props, State> {
+class LocationList extends React.Component<Props, State> {
     state: Readonly<State> = {
-        devices: [],
+        locations: [],
 
         addNewDialogOpen: false,
         isLoading: false,
@@ -37,21 +37,24 @@ class DeviceAdminList extends React.Component<Props, State> {
 
     loadDevices = (): void => {
         this.setState({isLoading: true})
-        getDevicesAdmin().then(value => {
-            this.setState({devices: value, isLoading: false});
+        getLocations().then(value => {
+            this.setState({locations: value, isLoading: false});
         }).catch(reason => {
             this.setState({isLoading: false, isError: true,})
         })
     }
 
-    onAddNewDevice = (): void => {
+    onAddNew = (): void => {
         this.setState({addNewDialogOpen: true})
     }
 
-    onAddNewDeviceSubmit = (device: Device) => {
+    onAddNewSubmit = (location: Location) => {
         this.setState({addNewDialogOpen: false, isLoading: true})
-        addDevice(device).then(value => {
+        addLocation(location).then(value => {
             this.loadDevices();
+            getLocations().then(data => {
+                CurrentUserStore.locations = data;
+            })
         }).catch(reason => {
             this.setState({isLoading: false, isError: true})
         })
@@ -61,9 +64,9 @@ class DeviceAdminList extends React.Component<Props, State> {
         this.setState({addNewDialogOpen: false})
     }
 
-    _renderDeviceList = (): ReactNode => {
-        let elements: ReactNode[] = this.state.devices.map(device => {
-            return <DeviceAdminListItem device={device} key={device.id}/>
+    _renderLocationsList = (): ReactNode => {
+        let elements: ReactNode[] = this.state.locations.map(location => {
+            return <LocationListItem location={location} key={location.id}/>
         })
 
         return (
@@ -81,17 +84,21 @@ class DeviceAdminList extends React.Component<Props, State> {
             <div>
                 <Loader show={this.state.isLoading}/>
                 <ErrorMessage show={this.state.isError}/>
-                <AddEditDeviceDialog onSubmit={this.onAddNewDeviceSubmit} onCancel={this.onAddNewClinicCancel}
+                <AddLocationDialog onSubmit={this.onAddNewSubmit} onCancel={this.onAddNewClinicCancel}
                                      isOpen={this.state.addNewDialogOpen}/>
                 <div className="row mb-5">
                     <div className="col">
-                        <h1>{t("Devices")}</h1>
+                        <h1>{t("Locations")}</h1>
+                    </div>
+                    <div className="col d-flex justify-content-end align-items-center">
+                        <button type="button" className="btn btn-success px-4"
+                                onClick={this.onAddNew}>{t("add")}</button>
                     </div>
                 </div>
-                {this._renderDeviceList()}
+                {this._renderLocationsList()}
             </div>
         );
     }
 }
 
-export default withTranslation()(DeviceAdminList)
+export default withTranslation()(LocationList)

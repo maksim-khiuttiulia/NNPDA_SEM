@@ -113,7 +113,7 @@ class DeviceAdminDetails extends Component<Props, State> {
 
     private renderSensorList = () => {
         let rows = this.state.sensors.map(s => {
-            const URL = RouterConstants.sensor.replace(":id", String(s.id))
+            const URL = RouterConstants.adminSensor.replace(":id", String(s.id))
             return <NavLink to={URL} className="card-link mb-3">
                 <div className="card">
                     <div className="card-header">
@@ -148,12 +148,10 @@ class DeviceAdminDetails extends Component<Props, State> {
                     <div className="col">
                         <h1>{device.name}</h1>
                         <h6>{getFormattedLocation(device.location)}</h6>
+                        <h6>{device.owner.username}</h6>
                     </div>
                     <div className="col d-flex justify-content-end align-items-center">
-                        <button type="button" className="btn btn-danger px-4"
-                                onClick={this.onAddSensorButtonClick}>{t("Add sensor")}</button>
-                        <button type="button" className="btn btn-danger px-4"
-                                onClick={this.onDeleteButtonClick}>{t("delete")}</button>
+
                     </div>
                 </div>
 

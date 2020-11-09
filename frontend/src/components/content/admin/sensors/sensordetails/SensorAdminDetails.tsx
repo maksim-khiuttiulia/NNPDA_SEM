@@ -3,10 +3,11 @@ import {RouteComponentProps, withRouter} from "react-router";
 import {withTranslation, WithTranslation} from "react-i18next";
 import {getDataTypeFormatted, getTypeTranslated, Sensor} from "../../../../../entities/Sensor";
 import {Measure} from "../../../../../entities/Measure";
-import {deleteSensor, getMeasures, getSensor} from "../../../../../services/DeviceService";
+import {deleteSensor} from "../../../../../services/DeviceService";
 import SubmitDialog from "../../../../common/submitdialog/SubmitDialog";
 import Loader from "../../../loader/Loader";
 import ErrorMessage from "../../../../common/errormessage/ErrorMessage";
+import {getMeasuresAdmin, getSensorAdmin} from "../../../../../services/AdminService";
 
 
 interface Props extends RouteComponentProps<MatchParams>, WithTranslation {
@@ -43,8 +44,8 @@ class SensorAdminDetails extends Component<Props, State> {
 
     loadData = () => {
         let id = Number(this.props.match.params.id);
-        let sensorPromise = getSensor(id);
-        let measurePromise = getMeasures(id);
+        let sensorPromise = getSensorAdmin(id);
+        let measurePromise = getMeasuresAdmin(id);
 
         Promise.all([sensorPromise, measurePromise]).then(([sensor, measure]) => {
             this.setState({isLoading: false, sensor: sensor, measures: measure})
@@ -111,10 +112,6 @@ class SensorAdminDetails extends Component<Props, State> {
                     <div className="col">
                         <h1>{sensor.name}</h1>
                         <h6>{getTypeTranslated(sensor.type)}</h6>
-                    </div>
-                    <div className="col d-flex justify-content-end align-items-center">
-                        <button type="button" className="btn btn-danger px-4"
-                                onClick={this.onDeleteButtonClick}>{t("delete")}</button>
                     </div>
                 </div>
 

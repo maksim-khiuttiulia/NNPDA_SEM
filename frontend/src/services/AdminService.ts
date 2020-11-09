@@ -1,7 +1,7 @@
-import {Device} from "../entities/Device";
 import API from "../utils/API";
 import {Sensor} from "../entities/Sensor";
 import {Measure} from "../entities/Measure";
+import {Device} from "../entities/Device";
 
 export async function getDevicesAdmin(): Promise<Device[]> {
     let response = await API.get("api/admin/devices")
@@ -13,7 +13,7 @@ export async function getDeviceAdmin(id: number): Promise<Device> {
     return await response.data;
 }
 
-export async function addDeviceAdmin(device: Device): Promise<Device> {
+export async function addDeviceAdmin(device: Location): Promise<Device> {
     let response = await API.post("api/admin/devices", device)
     return await response.data;
 }
@@ -33,7 +33,7 @@ export async function getSensorAdmin(id: number): Promise<Sensor> {
     return await response.data;
 }
 
-export async function addSensorAdmin(sensor: Sensor, id: number): Promise<Device> {
+export async function addSensorAdmin(sensor: Sensor, id: number): Promise<Sensor> {
     let response = await API.post("api/admin/devices/" + id, sensor)
     return await response.data;
 }

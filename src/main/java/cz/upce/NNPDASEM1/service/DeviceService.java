@@ -1,6 +1,7 @@
 package cz.upce.NNPDASEM1.service;
 
 import cz.upce.NNPDASEM1.domain.device.Device;
+import cz.upce.NNPDASEM1.domain.device.Sensor;
 import cz.upce.NNPDASEM1.domain.user.User;
 import cz.upce.NNPDASEM1.exceptions.NotFoundException;
 import cz.upce.NNPDASEM1.exceptions.ValidationException;
@@ -16,6 +17,9 @@ public class DeviceService {
 
     @Autowired
     private DeviceRepository deviceRepository;
+
+    @Autowired
+    private SensorService sensorService;
 
     public List<Device> getDevices() {
         return deviceRepository.findAll();
@@ -50,6 +54,9 @@ public class DeviceService {
     }
 
     public void deleteDevice(Device device) {
+        for (Sensor sensor : device.getSensors()) {
+            sensorService.deleteSensor(sensor);
+        }
         deviceRepository.delete(device);
     }
 }

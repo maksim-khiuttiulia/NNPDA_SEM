@@ -36,6 +36,9 @@ const TopMenu: React.FunctionComponent<Props> = ({t}) => {
                         <li className="nav-item">
                             <Link className="nav-link" to={RouterConstants.devices}>{t("Devices")}</Link>
                         </li>
+                        <li className="nav-item">
+                            <Link className="nav-link" to={RouterConstants.locations}>{t("Locations")}</Link>
+                        </li>
                         {renderAdmin()}
                     </ul>
 

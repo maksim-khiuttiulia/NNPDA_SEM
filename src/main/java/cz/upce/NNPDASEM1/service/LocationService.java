@@ -26,4 +26,8 @@ public class LocationService {
         }
         return location;
     }
+
+    public Location createLocation(Location location) {
+        return locationRepository.save(location);
+    }
 }

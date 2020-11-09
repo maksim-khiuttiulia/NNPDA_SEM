@@ -12,6 +12,7 @@ import SensorDetails from "./components/content/sensors/sensordetails/SensorDeta
 import DeviceAdminList from "./components/content/admin/devices/devicelist/DeviceAdminList";
 import DeviceAdminDetails from "./components/content/admin/devices/devicedetails/DeviceAdminDetails";
 import SensorAdminDetails from "./components/content/admin/sensors/sensordetails/SensorAdminDetails";
+import LocationList from "./components/content/location/locationlist/LocationList";
 
 export default class App extends React.Component<any, any> {
 
@@ -31,6 +32,7 @@ export default class App extends React.Component<any, any> {
                         <DashboardRoute exact path={RouterConstants.devices} component={DeviceList}/>
                         <DashboardRoute exact path={RouterConstants.device} component={DeviceDetails}/>
                         <DashboardRoute exact path={RouterConstants.sensor} component={SensorDetails}/>
+                        <DashboardRoute exact path={RouterConstants.locations} component={LocationList}/>
 
                         <DashboardRoute exact path={RouterConstants.adminDevices} component={DeviceAdminList}/>
                         <DashboardRoute exact path={RouterConstants.adminDevice} component={DeviceAdminDetails}/>

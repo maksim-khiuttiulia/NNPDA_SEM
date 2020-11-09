@@ -7,7 +7,6 @@ import cz.upce.NNPDASEM1.service.MeasureService;
 import cz.upce.NNPDASEM1.service.SensorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.scheduling.annotation.Scheduled;
 
 import java.util.List;
 
@@ -20,7 +19,7 @@ public class ScheduleConfig {
     @Autowired
     private MeasureService measureService;
 
-    @Scheduled(fixedDelay = 60000)
+    //@Scheduled(fixedDelay = 30000)
     public void addMeasures() {
         System.out.println("Adding measures");
         List<Sensor> sensors = sensorService.getSensors();
@@ -41,4 +40,5 @@ public class ScheduleConfig {
             measureService.saveMeasure(measure);
         }
     }
+
 }
