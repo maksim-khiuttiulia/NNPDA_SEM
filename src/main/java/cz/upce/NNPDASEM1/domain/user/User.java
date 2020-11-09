@@ -1,5 +1,6 @@
 package cz.upce.NNPDASEM1.domain.user;
 
+import cz.upce.NNPDASEM1.domain.Location;
 import cz.upce.NNPDASEM1.domain.device.Device;
 import lombok.Data;
 
@@ -41,8 +42,15 @@ public class User {
     @Column(nullable = false, name = "STATUS")
     private UserStatus status;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, name = "ROLE")
+    private UserRole role;
+
     @OneToMany(mappedBy = "owner")
     private List<Device> devices;
+
+    @OneToMany(mappedBy = "user")
+    private List<Location> locations;
 
     @Override
     public boolean equals(Object o) {

@@ -18,6 +18,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private static final String API_ENDPOINT = "/api/**";
     private static final String AUTH_ENDPOINT = "/api/auth/**";
+    private static final String ADMIN_ENDPOINT = "/api/admin/**";
     private static final String SWAGGER_ENDPOINT = "/swagger-ui/**";
 
     @Bean
@@ -47,10 +48,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers(AUTH_ENDPOINT).permitAll()
                 .antMatchers(SWAGGER_ENDPOINT).permitAll()
+                .antMatchers(ADMIN_ENDPOINT).permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .apply(jwtConfigurer);
         http.csrf().disable();
+        http.cors();
     }
 
 

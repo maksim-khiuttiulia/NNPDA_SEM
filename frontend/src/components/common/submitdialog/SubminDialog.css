@@ -1,0 +1,7 @@
+.submit-dialog-body .modal-content {
+    border-radius: 0;
+}
+
+.submit-dialog-body textarea {
+    min-height: 40px;
+}

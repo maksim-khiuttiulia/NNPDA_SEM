@@ -31,10 +31,40 @@
             <column name="STATUS" type="varchar">
                 <constraints nullable="false" unique="false"/>
             </column>
+            <column name="ROLE" type="varchar">
+                <constraints nullable="false" unique="false"/>
+            </column>
         </createTable>
     </changeSet>
 
     <changeSet id="2" author="Maks">
+        <createTable tableName="NN_LOCATIONS">
+            <column name="LOCATION_ID" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="ALIAS" type="varchar">
+                <constraints nullable="false" unique="false"/>
+            </column>
+            <column name="CITY" type="varchar">
+                <constraints nullable="false" unique="false"/>
+            </column>
+            <column name="STREET" type="varchar">
+                <constraints nullable="false" unique="false"/>
+            </column>
+            <column name="BUILDING_NUMBER" type="varchar">
+                <constraints nullable="false" unique="false"/>
+            </column>
+            <column name="USER_ID" type="bigint">
+                <constraints nullable="false" unique="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="NN_LOCATIONS" baseColumnNames="USER_ID"
+                                 constraintName="FK_NN_LOCATIONS_01"
+                                 referencedTableName="NN_USERS"
+                                 referencedColumnNames="USER_ID"/>
+    </changeSet>
+
+    <changeSet id="3" author="Maks">
         <createTable tableName="NN_DEVICES">
             <column name="DEVICE_ID" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
@@ -45,20 +75,30 @@
             <column name="USER_ID" type="bigint">
                 <constraints nullable="false" unique="false"/>
             </column>
+            <column name="LOCATION_ID" type="bigint">
+                <constraints nullable="false" unique="false"/>
+            </column>
         </createTable>
-        <addForeignKeyConstraint baseTableName="NN_DEVICES" baseColumnNames="USER_ID" constraintName="FK_NN_DEVICES_01"
+        <addForeignKeyConstraint baseTableName="NN_DEVICES" baseColumnNames="LOCATION_ID"
+                                 constraintName="FK_NN_DEVICES_01"
+                                 referencedTableName="NN_LOCATIONS"
+                                 referencedColumnNames="LOCATION_ID"/>
+        <addForeignKeyConstraint baseTableName="NN_DEVICES" baseColumnNames="USER_ID" constraintName="FK_NN_DEVICES_02"
                                  referencedTableName="NN_USERS"
                                  referencedColumnNames="USER_ID"/>
         <addUniqueConstraint tableName="NN_DEVICES" columnNames="USER_ID, NAME"
                              constraintName="UN_CONST_NN_DEVICES_01"/>
     </changeSet>
 
-    <changeSet id="3" author="Maks">
+    <changeSet id="4" author="Maks">
         <createTable tableName="NN_SENSORS">
             <column name="SENSOR_ID" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="NAME" type="varchar">
+                <constraints nullable="false" unique="false"/>
+            </column>
+            <column name="TYPE" type="varchar">
                 <constraints nullable="false" unique="false"/>
             </column>
             <column name="DEVICE_ID" type="bigint">
@@ -69,5 +109,25 @@
         <addForeignKeyConstraint baseTableName="NN_SENSORS" baseColumnNames="DEVICE_ID"
                                  constraintName="FK_NN_SENSORS_01" referencedTableName="NN_DEVICES"
                                  referencedColumnNames="DEVICE_ID"/>
+    </changeSet>
+
+    <changeSet id="5" author="Maks">
+        <createTable tableName="NN_MEASURES">
+            <column name="MEASURE_ID" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="date" type="timestamp" defaultValue="NOW()">
+                <constraints nullable="false" unique="false"/>
+            </column>
+            <column name="VALUE" type="float">
+                <constraints nullable="false" unique="false"/>
+            </column>
+            <column name="SENSOR_ID" type="bigint">
+                <constraints nullable="false" unique="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="NN_MEASURES" baseColumnNames="SENSOR_ID"
+                                 constraintName="FK_NN_MEASURES_01" referencedTableName="NN_SENSORS"
+                                 referencedColumnNames="SENSOR_ID"/>
     </changeSet>
 </databaseChangeLog>

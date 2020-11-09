@@ -1,0 +1,7 @@
+.add-edit-dialog-body .modal-content {
+    border-radius: 0;
+}
+
+.add-edit-dialog-body textarea {
+    min-height: 40px;
+}

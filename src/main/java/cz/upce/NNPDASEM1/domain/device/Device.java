@@ -1,5 +1,6 @@
 package cz.upce.NNPDASEM1.domain.device;
 
+import cz.upce.NNPDASEM1.domain.Location;
 import cz.upce.NNPDASEM1.domain.user.User;
 import lombok.Data;
 
@@ -24,4 +25,8 @@ public class Device {
 
     @OneToMany(mappedBy = "device")
     private List<Sensor> sensors;
+
+    @ManyToOne
+    @JoinColumn(name = "LOCATION_ID", nullable = false)
+    private Location location;
 }

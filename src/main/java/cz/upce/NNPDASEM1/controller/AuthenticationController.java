@@ -14,6 +14,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("api/auth")
+@CrossOrigin
 public class AuthenticationController extends ControllerAncestor {
 
     @Autowired
@@ -42,9 +43,18 @@ public class AuthenticationController extends ControllerAncestor {
         String username = authDto.getUsername();
         String password = authDto.getPassword();
         String token = userService.login(username, password);
+        User user = userService.findByUsername(username);
+
         AuthDto response = new AuthDto();
         response.setToken(token);
+        response.setRole(user.getRole());
         return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/me", method = RequestMethod.GET)
+    public ResponseEntity<UserDto> me() {
+        UserDto user = new UserDto(getCurrentUser());
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/reset-password-request", method = RequestMethod.POST)

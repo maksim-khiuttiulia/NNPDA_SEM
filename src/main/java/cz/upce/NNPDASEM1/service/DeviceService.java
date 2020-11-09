@@ -17,8 +17,20 @@ public class DeviceService {
     @Autowired
     private DeviceRepository deviceRepository;
 
+    public List<Device> getDevices() {
+        return deviceRepository.findAll();
+    }
+
     public List<Device> getDevices(User user) {
         return deviceRepository.findByOwner(user);
+    }
+
+    public Device getDevice(Long id) {
+        Optional<Device> device = deviceRepository.findById(id);
+        if (!device.isPresent()) {
+            throw new NotFoundException("Device " + id + " not found");
+        }
+        return device.get();
     }
 
     public Device getDevice(Long id, User user) {

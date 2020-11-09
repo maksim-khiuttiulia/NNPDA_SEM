@@ -13,6 +13,7 @@ public class JwtUserFactory {
         jwtUserDetails.setPassword(user.getPassword());
         jwtUserDetails.setLastPasswordReset(user.getLastPasswordReset());
         jwtUserDetails.setStatus(user.getStatus());
+        jwtUserDetails.setRole(user.getRole());
         return jwtUserDetails;
     }
 }

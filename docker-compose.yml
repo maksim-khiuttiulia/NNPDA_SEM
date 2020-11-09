@@ -1,0 +1,60 @@
+version: '3'
+
+services:
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+    container_name: spring-boot
+
+  elasticsearch:
+    build: elk/elasticsearch/
+    container_name: elasticsearch
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    environment:
+      ES_JAVA_OPTS: "-Xms1g -Xmx1g"
+    depends_on:
+      - postgres
+
+  logstash:
+    build: elk/logstash/
+    container_name: logstash
+    command: -f /etc/logstash/conf.d/
+    volumes:
+      - ./elk/logstash/config:/etc/logstash/conf.d
+    ports:
+      - "9999:9999"
+    depends_on:
+      - elasticsearch
+
+  kibana:
+    build: elk/kibana/
+    container_name: kibana
+    volumes:
+      - ./elk/kibana/config/:/opt/kibana/config/
+    ports:
+      - "5601:5601"
+    depends_on:
+      - elasticsearch
+
+  postgres:
+    image: postgres
+    container_name: postgresql
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_DB: NNPDA
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+
+  react:
+    container_name: react
+    build: frontend
+    restart: always
+    ports:
+      - 3001:3000
+

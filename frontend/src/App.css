@@ -1,0 +1,40 @@
+body {
+    min-width: 500px;
+}
+
+
+textarea:focus,
+input[type="text"]:focus,
+input[type="checkbox"]:focus,
+input[type="password"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="date"]:focus,
+input[type="month"]:focus,
+input[type="time"]:focus,
+input[type="week"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="color"]:focus {
+    border-color: #007F5F;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 4px #55A630;
+    outline: 0 none;
+    border-radius: 0px !important;
+}
+
+.btn-success {
+    color: #fff;
+    background-color: #2B9348;
+    border-color: #007F5F;
+}
+
+button,
+textarea,
+input,
+checkbox,
+.checkbox .checkbox-label::before {
+    border-radius: 0px !important;
+}

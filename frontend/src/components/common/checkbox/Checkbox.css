@@ -1,0 +1,23 @@
+
+.custom-control-input:checked ~ .custom-control-label::before,
+.custom-control-input:active ~ .custom-control-label::before {
+    color: #fff;
+    background-color: #2B9348;
+    border-color: #007F5F;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 4px #55A630;
+}
+
+.custom-control-input:focus ~ .custom-control-label::before {
+    border-color: #007F5F;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 4px #55A630;
+}
+
+checkbox,
+.custom-checkbox .custom-control-label::before {
+    border-radius: 0px !important;
+}
+
+.custom-control-input:focus ~ .custom-control-label::before {
+    border-color: #007F5F;
+}
+

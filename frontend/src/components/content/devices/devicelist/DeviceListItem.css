@@ -1,0 +1,11 @@
+.card {
+    border-radius: 0px;
+}
+
+.card-link {
+    color: #2B9348;
+}
+
+.card-link:hover {
+    color: #80B918;
+}
